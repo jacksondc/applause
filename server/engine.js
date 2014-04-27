@@ -36,7 +36,7 @@ function update(context) {
     var ip = info.ip;
     console.log('host is ' + host);
     console.log('ip is ' + ip);
-    
+
     if(host) {
       var page = Pages.findOne({url: host});
       
