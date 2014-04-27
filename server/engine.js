@@ -33,7 +33,13 @@ Meteor.methods({
 function update(context) {
     context.response.setHeader('access-control-allow-origin', '*');
     
-    var ip = context.request.connection.remoteAddress;
+    var ip =  context.request.headers["x-forwarded-for"];
+      if (ip){
+        var list = ip.split(",");
+        ip = list[list.length-1]; //last element in list
+      } else {
+        ip = context.request.connection.remoteAddress;
+      }
     var host = context.request.query.url;
     console.log('host is ' + host);
     console.log('ip is ' + ip);
