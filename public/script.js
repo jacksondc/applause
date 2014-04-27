@@ -4,7 +4,8 @@
 
     var main_css = "<link rel='stylesheet' type='text/css' href='" + remote + "/style.css'>";
     var cleanslate_css = "<link rel='stylesheet' type='text/css' href='" + remote + "/cleanslate.css'>";
-    document.querySelector('head').innerHTML += cleanslate_css + main_css;
+    var font_css = "<link href='http://fonts.googleapis.com/css?family=Open+Sans:400,700' rel='stylesheet' type='text/css'>"
+    document.querySelector('head').innerHTML += cleanslate_css + main_css + font_css;
 
     function createCORSRequest(method, url) {
       var xhr = new XMLHttpRequest();
