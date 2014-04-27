@@ -14,62 +14,60 @@ Router.map(function () {
     path: '/get',
     action: function () {
       sendGet(this);
-      //Meteor.call('getHost', this);
-      /*console.log("Referer:", this.request.headers['referer']);
-      console.log('------HEADERS-------\n' + JSON.stringify(this.request.headers) + '\n-------END HEADERS------');*/
     }
   });
 });
 
-Meteor.methods({
-  'getHost': function(context) {
-    /*headers.ready(context, function() {
-      var referrer = headers.get(this, 'host');
-      console.log('host: ' + referrer);
-    });*/
-  }
-})
+function getInfo(context) {
+  var ip = context.request.headers["x-forwarded-for"];
+    if (ip){
+      var list = ip.split(",");
+      ip = list[list.length-1]; //last element in list
+    } else {
+      ip = context.request.connection.remoteAddress;
+    }
+  var host = context.request.query.url;
+  return {ip: ip, host: host};
+}
 
 function update(context) {
-    context.response.setHeader('access-control-allow-origin', '*');
-    
-    var ip =  context.request.headers["x-forwarded-for"];
-      if (ip){
-        var list = ip.split(",");
-        ip = list[list.length-1]; //last element in list
-      } else {
-        ip = context.request.connection.remoteAddress;
-      }
-    var host = context.request.query.url;
+    var info = getInfo(context);
+    var host = info.host;
+    var ip = info.ip;
     console.log('host is ' + host);
     console.log('ip is ' + ip);
-    var page = Pages.findOne({url: host});
     
-    if(page) {
-      if(_.contains(page.voters, ip)) {
-        console.log('Already voted. Unvoting.');
-        Pages.update(page._id, {
-          $inc: {votes:-1},
-          $pull: { voters: ip }
-        });
+    if(host) {
+      var page = Pages.findOne({url: host});
+      
+      if(page) {
+        if(_.contains(page.voters, ip)) {
+          console.log('Already voted. Unvoting.');
+          Pages.update(page._id, {
+            $inc: {votes:-1},
+            $pull: { voters: ip }
+          });
+        } else {
+          console.log('Not already voted. Voting.');
+          Pages.update(page._id, {
+            $inc: {votes:1},
+            $addToSet: {voters: ip}
+          }); 
+        }
       } else {
-        console.log('Not already voted. Voting.');
-        Pages.update(page._id, {
-          $inc: {votes:1},
-          $addToSet: {voters: ip}
-        }); 
+        console.log('creating the page');
+        Pages.insert({url:host, votes: 1, voters:[ip]});
       }
-    } else {
-      console.log('creating the page');
-      Pages.insert({url:host, votes: 1, voters:[ip]});
     }
 }
 
 function sendGet(context) {
     context.response.setHeader('access-control-allow-origin', '*');
     
-    var ip = context.request.connection.remoteAddress;
-    var host = context.request.query.url;
+    var info = getInfo(context);
+    var host = info.host;
+    var ip = info.ip;
+
     var page = Pages.findOne({url: host});
 
     context.response.writeHead(200, {'Content-Type': 'application/json'});
