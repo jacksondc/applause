@@ -1,25 +1,25 @@
-<template name="main">
-	<meta http-equiv="refresh" content="0; url=http://www.jacksondc.com/applause/" />
-	Redirecting you to <a href="http://www.jacksondc.com/applause">jacksondc.com/applause</a>
+<template name="layout">
+	<div class="center">
+		{{> yield}}
+	</div>
 </template>
 
-<body>
-	{{> yield}}
-</body>
+<template name="main">
+	<meta http-equiv="refresh" content="2; url=http://www.jacksondc.com/applause/" />
+	Redirecting you to <a href="http://www.jacksondc.com/applause">jacksondc.com/applause</a>
+</template>
 
 <head>
 	<link href="http://fonts.googleapis.com/css?family=Open+Sans:400,700" rel="stylesheet" type="text/css">
 </head>
 
 <template name="search">
-	<div id="search">
 		<h1>Search</h1>
 		<form>
-			<input id="url" type="text" placeholder="URL (e.g. jacksondc.com/applause)">
+			<input id="url" type="text" placeholder="URL (e.g. jacksondc.com/applause/)">
 			<input type="submit" value="Search">
 		</form>
 		<p>
 			{{result}}
 		</p>
-	</div>
 </template>

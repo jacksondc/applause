@@ -1,6 +1,6 @@
 body {
-  text-align:center;
   font-family:'Open Sans', sans-serif;
+  text-align:center;
 }
 
 input {
@@ -10,7 +10,7 @@ input {
 }
 
 input[type=text] {
-  width:12rem;
+  width:13rem;
   text-align:center;
 }
 
@@ -24,7 +24,7 @@ body {
    width:100%;
 }
 
-#search {
+.center {
    display: table-cell;
    text-align: center;
    vertical-align: middle;
