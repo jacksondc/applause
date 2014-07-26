@@ -1,9 +1,11 @@
 (function() {
-    var domain = 'http://applause.meteor.com';
+    var remote = 'http://applauding.herokuapp.com';
+    var local = location.host + location.pathname;
 
-    var main_css = "<link rel='stylesheet' type='text/css' href='" + domain + "/style.css'>";
-    var cleanslate_css = "<link rel='stylesheet' type='text/css' href='" + domain + "/cleanslate.css'>";
-    document.querySelector('head').innerHTML += cleanslate_css + main_css;
+    var main_css = "<link rel='stylesheet' type='text/css' href='" + remote + "/style.css'>";
+    var cleanslate_css = "<link rel='stylesheet' type='text/css' href='" + remote + "/cleanslate.css'>";
+    var font_css = "<link href='http://fonts.googleapis.com/css?family=Open+Sans:400,700' rel='stylesheet' type='text/css'>"
+    document.querySelector('head').innerHTML += cleanslate_css + main_css + font_css;
 
     function createCORSRequest(method, url) {
       var xhr = new XMLHttpRequest();
@@ -47,12 +49,35 @@
         applause.innerHTML = "<div><span class='applause-count'>0</span><span class='applause-action'>Applaud</span></div>";
 
         applause.addEventListener('click', function() {
-            var xhr = createCORSRequest('GET', domain + '/update');
-            if (!xhr) {
-              throw new Error('Applause won\'t work because CORS is not supported.');
-              document.querySelector('#applause span').style.display = 'none';
-            }
+            sendRequest('update');
+        }, false);
 
+        sendRequest('get');
+    });
+
+    function updateCount(num) {
+        var count = fuzzify(num);
+        document.querySelector('#applause span.applause-count').innerHTML = count;
+    }
+
+    function sendRequest(type) {
+        var xhr = createCORSRequest('GET', remote + '/' + type + '?url=' + encodeURIComponent(local) );
+        if (!xhr) {
+          throw new Error('Applause won\'t work because CORS is not supported.');
+          document.querySelector('#applause span').style.display = 'none';
+        }
+
+        if(type === 'get') {
+            xhr.onload = function() {
+                var json = JSON.parse(xhr.responseText);
+                updateCount(json.votes);
+                if(json.voted) {
+                    document.querySelector('#applause').className += ' applause-voted';
+                    document.querySelector('#applause .applause-action').innerHTML = 'Applauded';
+                }
+                document.querySelector('#applause').style.display = 'table';
+            };
+        } else {
             xhr.onload = function() {
                 var json = JSON.parse(xhr.responseText);
                 updateCount(json.votes);
@@ -65,34 +90,10 @@
                     applauseAction.innerHTML = 'Applaud';
                 }
               };
-
-            xhr.onerror = error;
-
-            xhr.send();
-        }, false);
-
-        var xhr = createCORSRequest('GET', domain + '/get');
-        if (!xhr) {
-          throw new Error('Applause won\'t work because CORS is not supported.');
         }
-
-        xhr.onload = function() {
-            var json = JSON.parse(xhr.responseText);
-            updateCount(json.votes);
-            if(json.voted) {
-                document.querySelector('#applause').className += ' applause-voted';
-                document.querySelector('#applause .applause-action').innerHTML = 'Applauded';
-            }
-            document.querySelector('#applause').style.display = 'table';
-        };
 
         xhr.onerror = error;
 
         xhr.send();
-    });
-
-    function updateCount(num) {
-        var count = fuzzify(num);
-        document.querySelector('#applause span.applause-count').innerHTML = count;
     }
 })();

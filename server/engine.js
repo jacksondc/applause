@@ -39,7 +39,7 @@ function update(context) {
 
     if(host) {
       var page = Pages.findOne({url: host});
-      
+
       if(page) {
         if(_.contains(page.voters, ip)) {
           console.log('Already voted. Unvoting.');
@@ -52,7 +52,7 @@ function update(context) {
           Pages.update(page._id, {
             $inc: {votes:1},
             $addToSet: {voters: ip}
-          }); 
+          });
         }
       } else {
         console.log('creating the page');
@@ -63,7 +63,7 @@ function update(context) {
 
 function sendGet(context) {
     context.response.setHeader('access-control-allow-origin', '*');
-    
+
     var info = getInfo(context);
     var host = info.host;
     var ip = info.ip;

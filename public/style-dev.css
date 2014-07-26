@@ -5,7 +5,6 @@
 
 #applause {
     display:table !important;
-    margin:0 auto !important;
     position:relative !important;
     width:75px !important;
     height:75px !important;
@@ -34,6 +33,7 @@
 #applause div {
     display:table-cell !important;
     vertical-align:middle !important;
+    text-align: center !important;
 }
 
 #applause.applause-voted {
@@ -47,7 +47,6 @@
 
 #applause span.applause-count {
     width: 75px !important;
-    text-align: center !important;
     font-size:40px !important;
     font-weight:bold !important;
     line-height:1 !important;
@@ -55,5 +54,4 @@
 
 #applause span.applause-action {
     font-size:12px !important;
-    text-align: center !important;
 }
