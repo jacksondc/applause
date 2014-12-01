@@ -12,7 +12,7 @@
 
     var css_stack = cleanslate_css + main_css;
     if(loadFont) { css_stack += font_css; }
-    document.querySelector('head').innerHTML += css_stack;
+    document.querySelector('head').innerHTML = css_stack + document.querySelector('head').innerHTML;
 
     function createCORSRequest(method, url) {
       var xhr = new XMLHttpRequest();
