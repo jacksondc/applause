@@ -3,7 +3,7 @@ Applause
 
 Applause is a like button that's really simple to set up. It's designed for static sites - no backend required (we take care of that.) You should probably look at the [demo](http://jacksondc.com/applause) before reading any further.
 
-##What is it exactly?
+##What is it again?
 It's kind of like Facebook's like button or Medium's recommend button, but anonymous. Or like Svbtle's [Kudos button](http://dcurt.is/unkudo), without the infuriatingly unintuitive part.
 
 ##Installation
@@ -12,7 +12,7 @@ It's kind of like Facebook's like button or Medium's recommend button, but anony
 3. Done!
 
 ##Customization
-Add a `color` parameters to the script URL to change the outline and background:
+Add a `color` parameter to the script URL to change the outline and background:
 
 ```
 <script src="http://applause.jacksondc.com/script.js?color=C01025"></script>
