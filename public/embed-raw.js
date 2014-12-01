@@ -2,8 +2,8 @@
     var loadFont = {LOAD_FONT};
     var color = {COLOR};
 
-    //var remote = 'http://applauding.herokuapp.com';
-    var remote = 'http://localhost:3000';
+    var remote = 'http://applauding.herokuapp.com';
+    //var remote = 'http://localhost:3000';
     var local = location.host + location.pathname;
 
     var main_css = "<link rel='stylesheet' type='text/css' href='" + remote + "/embed.min.css?color=" + color + "'>";
