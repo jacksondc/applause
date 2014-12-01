@@ -6,5 +6,9 @@
 standard-app-packages
 autopublish
 insecure
-iron-router
-headers
+iron:router
+gadicohen:headers@0.0.24
+meteorhacks:npm
+
+
+npm-container

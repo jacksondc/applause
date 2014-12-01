@@ -1,0 +1,10 @@
+{
+  "dependencies": {
+    "cssmin": {
+      "version": "0.4.2"
+    },
+    "jsmin": {
+      "version": "1.0.1"
+    }
+  }
+}

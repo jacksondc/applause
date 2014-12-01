@@ -1,11 +1,18 @@
 (function() {
-    var remote = 'http://applauding.herokuapp.com';
+    var loadFont = {LOAD_FONT};
+    var color = {COLOR};
+
+    //var remote = 'http://applauding.herokuapp.com';
+    var remote = 'http://localhost:3000';
     var local = location.host + location.pathname;
 
-    var main_css = "<link rel='stylesheet' type='text/css' href='" + remote + "/style.css'>";
+    var main_css = "<link rel='stylesheet' type='text/css' href='" + remote + "/embed.min.css?color=" + color + "'>";
     var cleanslate_css = "<link rel='stylesheet' type='text/css' href='" + remote + "/cleanslate.css'>";
     var font_css = "<link href='http://fonts.googleapis.com/css?family=Open+Sans:400,700' rel='stylesheet' type='text/css'>"
-    document.querySelector('head').innerHTML += cleanslate_css + main_css + font_css;
+
+    var css_stack = cleanslate_css + main_css;
+    if(loadFont) { css_stack += font_css; }
+    document.querySelector('head').innerHTML += css_stack;
 
     function createCORSRequest(method, url) {
       var xhr = new XMLHttpRequest();
@@ -45,6 +52,7 @@
 
     document.addEventListener('DOMContentLoaded', function() {
         var applause = document.querySelector('#applause');
+
         applause.className += "cleanslate";
         applause.innerHTML = "<div><span class='applause-count'>0</span><span class='applause-action'>Applaud</span></div>";
 

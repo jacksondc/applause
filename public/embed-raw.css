@@ -8,7 +8,7 @@
     position:relative !important;
     width:75px !important;
     height:75px !important;
-    border:4px solid #025D8C !important;
+    border:4px solid #{COLOR} !important;
 
     -webkit-transition: color 0.5s ease-out;
     -moz-transition: color 0.5s ease-out;
@@ -37,7 +37,7 @@
 }
 
 #applause.applause-voted {
-    background-color:#025D8C !important;
+    background-color:#{COLOR} !important;
     color:#FFF !important;
 }
 

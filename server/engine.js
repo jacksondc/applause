@@ -16,6 +16,72 @@ Router.map(function () {
       sendGet(this);
     }
   });
+
+  this.route('embed.min.css', {
+    where: 'server',
+    action: function () {
+      var headers = {
+        'Content-type': 'text/css'
+      };
+
+      var file = '';
+      var color = this.params.query.color;
+
+      var fs = Npm.require('fs');
+      var root = process.env.PWD;
+      var context = this;
+
+      var cssmin = Meteor.npmRequire('cssmin');
+
+      fs.readFile(root + '/public/embed-raw.css', 'utf8', function (err, data) {
+        if (err) {
+            console.log('Error: ' + err);
+        }
+
+        //this is probably a horrible idea but I'm going to do it anyway
+        file = data.replace(/\{COLOR\}/gi, color);
+
+        file = cssmin(file);
+
+        context.response.writeHead(200, headers);
+        context.response.end(file);
+      });
+    }
+  });
+
+  this.route('embed.min.js', {
+    where: 'server',
+    action: function () {
+      var headers = {
+        'Content-type': 'application/javascript'
+      };
+
+      var file = '';
+      //should be true unless explicitly said to be false
+      var loadFont = !(this.params.query.font === "false");
+      var color = this.params.query.color || '025D8C';
+
+      var fs = Npm.require('fs');
+      var root = process.env.PWD;
+      var context = this;
+
+      var jsmin = Meteor.npmRequire('jsmin').jsmin;
+
+      fs.readFile(root + '/public/embed-raw.js', 'utf8', function (err, data) {
+        if (err) {
+            console.log('Error: ' + err);
+        }
+
+        //this is probably a horrible idea but I'm going to do it anyway
+        file = data.replace(/\{LOAD_FONT\}/gi, loadFont, 'g').replace(/\{COLOR\}/gi, "'" + color + "'");
+
+        file = jsmin(file);
+
+        context.response.writeHead(200, headers);
+        context.response.end(file);
+      });
+    }
+  });
 });
 
 function getInfo(context) {
