@@ -60,10 +60,8 @@ textarea {
    Author's custom styles
    ========================================================================== */
 h1 {
-  font-size:5rem;
-  text-align:center;
-  margin-top:2rem;
-  margin-bottom:0;
+  font-size:4rem;
+  margin-bottom:1rem;
   color:#025D8C;
 }
 
@@ -71,9 +69,10 @@ h1 {
 body {
     font-family:'Open Sans', 'Helvetica', sans-serif;
     color:#444;
-    max-width:500px;
-    margin:0 auto;
+    max-width:550px;
+    margin:3rem auto;
     line-height:1.45;
+    font-size:1.125rem;
 }
 
 code {
@@ -86,6 +85,18 @@ code {
   box-shadow: 0.5rem 0 0 #EEE, -0.5rem 0 0 #EEE;
 }
 
+pre code {
+  background-color:transparent;
+  word-break:normal;
+  margin:0;
+  box-shadow:none;
+}
+
+pre {
+  background-color:#EEE;
+  padding:0.5rem;
+}
+
 a {
   text-decoration:none;
   color: #028c76;
@@ -96,8 +107,17 @@ a:hover {
   border-bottom:2px solid #444;
 }
 
-#applause {
-  margin:0 auto !important;
+.applause {
+  margin-top:-1.5rem;
+  float:right !important;
+  margin-left:2rem !important;
+}
+
+.applause h3 {
+  margin:0;
+  text-transform:uppercase;
+  color:#666;
+  font-size:1.25rem;
 }
 
 p {
@@ -107,9 +127,6 @@ p {
 h2 {
   margin-bottom:0;
 }
-
-
-
 
 
 

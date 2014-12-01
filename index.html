@@ -22,33 +22,44 @@
 
         <h1>Applause</h1>
 
-        <h2>What</h2>
+        <div class="applause">
+          <h3>Demo</h3>
+          <div id="applause" data-color="#ff0000" data-font="false"></div>
+        </div>
 
-        <p>Applause is a like button that's really simple to set up.</p>
+        <p>Applause is a like button that's really simple to set up. It's designed for static sites - no backend required (we take care of that.) Questions and pull requests are welcome on <a href="http://github.com/jacksondc/applause">GitHub</a>.</p>
 
-        <h2>How</h2>
-          <ol>
-            <li>
-              Add <code>&lt;div id=&quot;applause&quot;&gt;&lt;/div&gt;</code>
-              where you want the button.
-            </li>
-            <li>
-              Add <code>&lt;script src=&quot;http://applause.jacksondc.com/script.js&quot;&gt;&lt;/script&gt;</code> after your body.</a>
-            </li>
-          </ol>
-        </p>
+        <h2>What is it again?</h2>
 
-        <h2>Demo</h2>
-        <div id="applause"></div>
+        <p>It's kind of like Facebook's like button or Medium's recommend button, but anonymous. Or like Svbtle's <a href="http://dcurt.is/unkudo">Kudos button</a>, without the infuriatingly unintuitive part.</p>
 
-        <h2>Details</h2>
-        <p>Applause automatically prevents double-voting. It's loosely inspired by <a href='http://dcurt.is/codename-svbtle'>Kudos</a>
-          and <a href="https://github.com/creatorrr/OpenKudos">Open Kudos.</a>
-          Email me if you have questions.</p>
+        <h2>Installation</h2>
+
+        <ol>
+        <li>Add <code>&lt;div id="applause"&gt;&lt;/div&gt;</code> where you want the button</li>
+        <li>Add <code>&lt;script src="http://applause.jacksondc.com/script.js"&gt;&lt;/script&gt;</code> after your body</li>
+        <li>Done!</li>
+        </ol>
+
+        <h2>Customization</h2>
+
+        <p>Add a <code>color</code> parameter to the script URL to change the outline and background:</p>
+
+        <pre><code>&lt;script src="http://applause.jacksondc.com/script.js?color=C01025"&gt;&lt;/script&gt;</code></pre>
+
+        <p>By default, Applause loads Open Sans for the button. To disable font loading (and inherit a font), use:</p>
+
+        <pre><code>&lt;script src="http://applause.jacksondc.com/script.js?font=false"&gt;&lt;/script&gt;</code></pre>
+
+        <p>Applause aggressively resets your styles with <a href="https://github.com/premasagar/cleanslate">Cleanslate</a>, so if you want to modify things further, you'll have to overrride the CSS (look in /public/embed-raw.css for some clues.)</p>
+
+        <h2>Server</h2>
+
+        <p>A few details: the server is built in Meteor and hosted on Heroku. It counts Applause based on URL, so if you have multiple URLs showing the same content (e.g. an index with links to article pages) you'll only be able to put the button on one of the pages. It also only allows one vote per IP, which is probably good-enough system considering that you can cheat and show whatever number you want anyway.</p>
 
         <script>window.jQuery || document.write('<script src="js/vendor/jquery-1.10.1.min.js"><\/script>')</script>
 
         <script src="js/main.js"></script>
-        <script src="http://applause.jacksondc.com/script.js"></script>
+        <script src="http://applause.jacksondc.com/embed.min.js"></script>
     </body>
 </html>
