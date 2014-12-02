@@ -26,6 +26,14 @@ Router.map(function () {
 
       var file = '';
       var color = this.params.query.color;
+      var font = this.params.query.font;
+
+      var fontStack;
+      if(font === 'false') {
+        fontStack = 'inherit';
+      } else {
+        fontStack = "'Open Sans', 'Helvetica', sans-serif !important'";
+      }
 
       var fs = Npm.require('fs');
       var root = process.env.PWD;
@@ -39,7 +47,7 @@ Router.map(function () {
         }
 
         //this is probably a horrible idea but I'm going to do it anyway
-        file = data.replace(/\{COLOR\}/gi, color);
+        file = data.replace(/\{COLOR\}/g, color).replace(/\{FONT_STACK\}/g, fontStack);
 
         file = cssmin(file);
 
@@ -73,7 +81,7 @@ Router.map(function () {
         }
 
         //this is probably a horrible idea but I'm going to do it anyway
-        file = data.replace(/\{LOAD_FONT\}/gi, loadFont, 'g').replace(/\{COLOR\}/gi, "'" + color + "'");
+        file = data.replace(/\{LOAD_FONT\}/g, loadFont, 'g').replace(/\{COLOR\}/g, "'" + color + "'");
 
         file = jsmin(file);
 

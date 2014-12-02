@@ -6,13 +6,13 @@
     //var remote = 'http://localhost:3000';
     var local = location.host + location.pathname;
 
-    var main_css = "<link rel='stylesheet' type='text/css' href='" + remote + "/embed.min.css?color=" + color + "'>";
+    var main_css = "<link rel='stylesheet' type='text/css' href='" + remote + "/embed.min.css?color=" + color + "&font=" + loadFont + "'>";
     var cleanslate_css = "<link rel='stylesheet' type='text/css' href='" + remote + "/cleanslate.css'>";
     var font_css = "<link href='http://fonts.googleapis.com/css?family=Open+Sans:400,700' rel='stylesheet' type='text/css'>"
 
     var css_stack = cleanslate_css + main_css;
     if(loadFont) { css_stack += font_css; }
-    document.querySelector('head').innerHTML = css_stack + document.querySelector('head').innerHTML;
+    document.querySelector('head').innerHTML = document.querySelector('head').innerHTML + css_stack;
 
     function createCORSRequest(method, url) {
       var xhr = new XMLHttpRequest();

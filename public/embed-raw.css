@@ -1,5 +1,5 @@
 #applause, #applause div, #applause span.applause-count, #applause span.applause-action {
-    font-family:'Open Sans', 'Helvetica', sans-serif !important;
+    font-family:{FONT_STACK};
     cursor:pointer !important;
 }
 
