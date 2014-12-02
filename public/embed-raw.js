@@ -2,12 +2,11 @@
     var loadFont = {LOAD_FONT};
     var color = {COLOR};
 
-    var remote = 'http://applauding.herokuapp.com';
-    //var remote = 'http://localhost:3000';
+    var remote = {REMOTE}; //includes trailing slash
     var local = location.host + location.pathname;
 
-    var main_css = "<link rel='stylesheet' type='text/css' href='" + remote + "/embed.min.css?color=" + color + "&font=" + loadFont + "'>";
-    var cleanslate_css = "<link rel='stylesheet' type='text/css' href='" + remote + "/cleanslate.css'>";
+    var main_css = "<link rel='stylesheet' type='text/css' href='" + remote + "embed.min.css?color=" + color + "&font=" + loadFont + "'>";
+    var cleanslate_css = "<link rel='stylesheet' type='text/css' href='" + remote + "cleanslate.css'>";
     var font_css = "<link href='http://fonts.googleapis.com/css?family=Open+Sans:400,700' rel='stylesheet' type='text/css'>"
 
     var css_stack = cleanslate_css + main_css;
@@ -69,7 +68,7 @@
     }
 
     function sendRequest(type) {
-        var xhr = createCORSRequest('GET', remote + '/' + type + '?url=' + encodeURIComponent(local) );
+        var xhr = createCORSRequest('GET', remote + type + '?url=' + encodeURIComponent(local) );
         if (!xhr) {
           throw new Error('Applause won\'t work because CORS is not supported.');
           document.querySelector('#applause span').style.display = 'none';
