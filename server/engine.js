@@ -25,14 +25,20 @@ Router.map(function () {
       };
 
       var file = '';
-      var color = this.params.query.color;
       var font = this.params.query.font;
+      var color = this.params.query.color;
+
+      if(color.length === 3) {
+        color = color.replace(/(.)/g, '$1$1'); // #E47 -> EE4477
+      }
+
+      var inverseColor = weShouldInvert(color) ? '000' : '222';
 
       var fontStack;
       if(font === 'false') {
         fontStack = 'inherit';
       } else {
-        fontStack = "'Open Sans', 'Helvetica', sans-serif !important'";
+        fontStack = "'Open Sans', 'Helvetica', sans-serif !important";
       }
 
       var fs = Npm.require('fs');
@@ -47,7 +53,7 @@ Router.map(function () {
         }
 
         //this is probably a horrible idea but I'm going to do it anyway
-        file = data.replace(/\{COLOR\}/g, color).replace(/\{FONT_STACK\}/g, fontStack);
+        file = data.replace(/\{COLOR\}/g, color).replace(/\{FONT_STACK\}/g, fontStack).replace(/\{INVERSE_COLOR\}/g, inverseColor);
 
         file = cssmin(file);
 
@@ -156,4 +162,12 @@ function sendGet(context) {
       var response = { votes: 0, voted: false };
       context.response.end(JSON.stringify(response));
     }
+}
+
+function weShouldInvert(hexcolor){
+	var r = parseInt(hexcolor.substr(0,2),16);
+	var g = parseInt(hexcolor.substr(2,2),16);
+	var b = parseInt(hexcolor.substr(4,2),16);
+	var yiq = ((r*299)+(g*587)+(b*114))/1000;
+	return (yiq >= 128);
 }
