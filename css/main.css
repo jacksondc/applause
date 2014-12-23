@@ -84,6 +84,8 @@ code {
 
   margin: 0.5rem;
   box-shadow: 0.5rem 0 0 #EEE, -0.5rem 0 0 #EEE;
+
+  font-family:'Source Code Pro', monospace;
 }
 
 pre code {
