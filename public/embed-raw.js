@@ -7,7 +7,7 @@
 
     var main_css = "<link rel='stylesheet' type='text/css' href='" + remote + "embed.min.css?color=" + color + "&font=" + loadFont + "'>";
     var cleanslate_css = "<link rel='stylesheet' type='text/css' href='" + remote + "cleanslate.css'>";
-    var font_css = "<link href='http://fonts.googleapis.com/css?family=Open+Sans:400,700' rel='stylesheet' type='text/css'>"
+    var font_css = "<link href='http://fonts.googleapis.com/css?family=Open+Sans:400,700&text=0123456789Applauded' rel='stylesheet' type='text/css'>"
 
     var css_stack = cleanslate_css + main_css;
     if(loadFont) { css_stack += font_css; }
