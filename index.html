@@ -55,8 +55,19 @@
         <h2>Server</h2>
 
         <p>A few details: the server is built with Meteor and hosted on Heroku. It counts Applause based on URL, so if you have multiple URLs showing the same content (e.g. an index with links to article pages) you'll only be able to put the button on one of the pages. It also only allows one vote per IP, which is probably a good enough system considering that you can cheat and show whatever number you want anyway.</p>
-
+        
         <script src="http://applause.jacksondc.com/embed.min.js"></script>
         <!--<script src="http://localhost:3000/embed.min.js"></script>-->
+        
+        <script>
+          (function(i,s,o,g,r,a,m){i['GoogleAnalyticsObject']=r;i[r]=i[r]||function(){
+          (i[r].q=i[r].q||[]).push(arguments)},i[r].l=1*new Date();a=s.createElement(o),
+          m=s.getElementsByTagName(o)[0];a.async=1;a.src=g;m.parentNode.insertBefore(a,m)
+          })(window,document,'script','//www.google-analytics.com/analytics.js','ga');
+        
+          ga('create', 'UA-38556084-3', 'auto');
+          ga('send', 'pageview');
+        
+        </script>
     </body>
 </html>
